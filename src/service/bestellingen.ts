@@ -33,7 +33,7 @@ const getById = async (id: number) => {
 	});
 	if (data === null) return null;
 	const totaalPrijs = data?.bestelregels.reduce(
-		(totaal, bestelregel) =>
+		(totaal: number, bestelregel: { aantal: number; product: { prijs: number; }; }) =>
 			totaal + bestelregel.aantal * bestelregel.product.prijs,
 		0
 	);
