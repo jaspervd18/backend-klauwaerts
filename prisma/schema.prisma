@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Aankoper {
+  id           Int          @id @default(autoincrement())
+  naam         String
+  voornaam     String
+  email        String
+  wachtwoord   String
+  bestellingen Bestelling[]
+  klant        Klant        @relation(fields: [klantId], references: [id], onDelete: Cascade)
+  klantId      Int
+
+  @@map("aankoper")
+}
+
+model Klant {
+  id           Int           @id @default(autoincrement())
+  naam         String        @unique
+  logo         String        @db.VarChar(512)
+  adres        Adres         @relation(fields: [adresId], references: [id], onDelete: Restrict)
+  adresId      Int
+  gsm          String
+  aankopers    Aankoper[]
+  notificaties Notificatie[]
+
+  @@map("klant")
+}
+
+model Notificatie {
+  id               Int        @id @default(autoincrement())
+  statusBestelling Int        @default(0)
+  toestand         Int        @default(2)
+  bestelling       Bestelling @relation(fields: [bestellingId], references: [id], onDelete: Cascade)
+  bestellingId     Int
+  klant            Klant      @relation(fields: [klantId], references: [id], onDelete: Cascade)
+  klantId          Int
+  createdAt        DateTime   @default(now())
+
+  @@map("notificatie")
+}
+
+model Bestelling {
+  id                Int              @id @default(autoincrement())
+  status            Int              @default(0)
+  bestelregels      Bestelregel[]
+  aankoper          Aankoper         @relation(fields: [aankoperId], references: [id], onDelete: Restrict)
+  aankoperId        Int
+  doos              Doos?            @relation(fields: [doosId], references: [id], onDelete: SetNull)
+  doosId            Int?
+  transportdienst   Transportdienst? @relation(fields: [transportdienstId], references: [id], onDelete: SetNull)
+  transportdienstId Int?             @default(1)
+  leverAdres        Adres            @relation(fields: [leverAdresId], references: [id], onDelete: Restrict)
+  leverAdresId      Int
+  trackAndTrace     TTCode?
+  createdAt         DateTime         @default(now())
+  notificaties      Notificatie[]
+
+  @@map("bestelling")
+}
+
+model Bestelregel {
+  id           Int        @id @default(autoincrement())
+  aantal       Int        @default(1)
+  prijs        Float
+  product      Product    @relation(fields: [productId], references: [id], onDelete: Restrict)
+  productId    Int
+  bestelling   Bestelling @relation(fields: [bestellingId], references: [id], onDelete: Cascade)
+  bestellingId Int
+
+  @@map("bestelregel")
+}
+
+model Product {
+  id           Int           @id @default(autoincrement())
+  naam         String
+  foto         String
+  omschrijving String
+  prijs        Float
+  stock        Int
+  levertijd    Int
+  Bestelregel  Bestelregel[]
+
+  @@map("product")
+}
+
+model Doos {
+  id           Int          @id @default(autoincrement())
+  naam         String       @unique
+  actief       Boolean      @default(true)
+  breedte      Float
+  hoogte       Float
+  lengte       Float
+  prijs        Float        @default(0)
+  type         Int          @default(0)
+  bestellingen Bestelling[]
+
+  @@map("doos")
+}
+
+model Transportdienst {
+  id                Int              @id @default(autoincrement())
+  naam              String           @unique
+  actief            Boolean          @default(true)
+  TTaantalKarakters Int              @default(6)
+  TTenkelCijfers    Boolean          @default(false)
+  prefix            String
+  codes             TTCode[]
+  contactpersonen   Contactpersoon[]
+  bestellingen      Bestelling[]
+
+  @@map("transportdienst")
+}
+
+model TTCode {
+  id                Int             @id @default(autoincrement())
+  code              String          @unique
+  transportdienst   Transportdienst @relation(fields: [transportdienstId], references: [id], onDelete: Cascade)
+  transportdienstId Int
+  bestelling        Bestelling      @relation(fields: [bestellingId], references: [id], onDelete: Cascade)
+  bestellingId      Int             @unique
+
+  @@map("ttcode")
+}
+
+model Contactpersoon {
+  id                Int             @id @default(autoincrement())
+  naam              String
+  voornaam          String
+  email             String
+  gsm               String
+  transportdienst   Transportdienst @relation(fields: [transportdienstId], references: [id], onDelete: Cascade)
+  transportdienstId Int
+
+  @@map("contactpersoon")
+}
+
+model Medewerker {
+  id         Int    @id @default(autoincrement())
+  functie    Int    @default(0)
+  naam       String
+  voornaam   String
+  email      String @unique
+  wachtwoord String
+  gsm        String
+
+  @@map("medewerker")
+}
+
+model Adres {
+  id           Int          @id @default(autoincrement())
+  straat       String
+  huisnummer   String
+  postcode     String
+  land         String
+  klanten      Klant[]
+  bestellingen Bestelling[]
+
+  @@unique([straat, huisnummer, postcode, land])
+  @@map("adres")
+}
