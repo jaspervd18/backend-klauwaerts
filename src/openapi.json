@@ -19,8 +19,8 @@
     "/events/{id}": {
       "get": {
         "tags": ["Events"],
-        "description": "Haal een aankoper op",
-        "operationId": "getAankoperById",
+        "description": "Haal een event op",
+        "operationId": "getEventById",
         "parameters": [
           {
             "$ref": "#/components/parameters/id"
@@ -28,21 +28,64 @@
         ],
         "responses": {
           "200": {
-            "description": "Aankoper gevonden",
+            "description": "Event gevonden",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Aankoper"
+                  "$ref": "#/components/schemas/Event"
                 }
               }
             }
           },
           "400": {
-            "description": "Ongeldige aankoperId"
+            "description": "Ongeldige eventId"
           },
           "404": {
-            "description": "Aankoper niet gevonden"
+            "description": "Event niet gevonden"
           }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": ["Health"],
+        "description": "Haal de status van de applicatie op",
+        "operationId": "getHealth",
+        "responses": {
+          "200": {
+            "description": "Applicatie is gezond"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "start": {
+            "type": "date"
+          },
+          "end": {
+            "type": "date"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer"
         }
       }
     }
