@@ -38,11 +38,19 @@ const updateEventById = async (req: Request, res: Response) => {
   res.status(200).json(event);
 };
 
+const deleteEventById = async (req: Request, res: Response) => {
+  const event = await eventService.deleteById(Number(req.params.id));
+  if (!event)
+    throw new AppError(404, `Event ${Number(req.params.id)} not found`);
+  res.status(200).json(event);
+};
+
 const eventsRouter = express.Router();
 eventsRouter
   .get("/", limitOffsetValidator, validate, getAllEvents)
   .get("/:id", idValidator, validate, getEventById)
   .post("/", newEventValidator, validate, createEvent)
-  .put("/:id", updateEventValidator, idValidator, validate, updateEventById);
+  .put("/:id", updateEventValidator, idValidator, validate, updateEventById)
+  .delete("/:id", idValidator, validate, deleteEventById);
 
 export default eventsRouter;

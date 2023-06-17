@@ -48,9 +48,17 @@ const updateById = async (id: number, body: any) => {
   });
 };
 
+const deleteById = async (id: number) => {
+  if ((await getById(id)) === null) return null;
+  return prisma.event.delete({
+    where: { id },
+  });
+};
+
 export default {
   getAll,
   getById,
   create,
   updateById,
+  deleteById,
 };

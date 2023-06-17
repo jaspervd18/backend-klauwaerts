@@ -14,22 +14,11 @@ const limitOffsetValidator = [
 
 const updateEventValidator = [
   body("title", "Title is required").isString(),
-  body("start", "Start of event is required").isDate(),
-  body("end", "End of event is required").isDate(),
+  body("start", "Start of event is required").isString(),
+  body("end", "End of event is required").isString(),
 ];
 
-const newEventValidator = [
-  ...updateEventValidator,
-  //   body("aankoperId", "AankoperId must be positive int").isInt({ min: 0 }),
-  //   body("bestelregels", "Bestelregels must be Array").isArray(),
-  //   body("bestelregels.*.productId", "ProductId must be positive int").isInt({
-  //     min: 0,
-  //   }),
-  //   body("bestelregels.*.aantal", "Aantal must be atleast 1").isInt({ min: 1 }),
-  //   body("bestelregels.*.prijs", "Prijs must be positive int").isFloat({
-  //     min: 0,
-  //   }),
-];
+const newEventValidator = [...updateEventValidator];
 
 export {
   idValidator,
