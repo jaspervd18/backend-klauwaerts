@@ -19,13 +19,13 @@ export default async function seedEvents() {
 const EVENTS = [
   {
     id: 1,
-    title: "Training jeugd",
+    title: "Schermschool",
     start: new Date("2023-06-16T18:00:00.000Z"),
     end: new Date("2023-06-16T19:30:00.000Z"),
   },
   {
     id: 2,
-    title: "Training volwassenen",
+    title: "Beloften & Volwassenen",
     start: new Date("2023-06-16T19:30:00.000Z"),
     end: new Date("2023-06-16T21:30:00.000Z"),
   },
