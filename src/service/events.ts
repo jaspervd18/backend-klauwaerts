@@ -16,6 +16,12 @@ const getById = async (id: number) => {
       title: true,
       start: true,
       end: true,
+      trainer: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
     },
   });
   if (data === null) return null;
