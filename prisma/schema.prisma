@@ -8,10 +8,20 @@ datasource db {
 }
 
 model Event {
-  id    Int      @id @default(autoincrement())
-  title String
-  start DateTime @default(now())
-  end   DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  title     String
+  start     DateTime @default(now())
+  end       DateTime @default(now())
+  trainer   Trainer? @relation(fields: [trainerId], references: [id], onDelete: SetNull)
+  trainerId Int?
 
   @@map("event")
+}
+
+model Trainer {
+  id    Int     @id @default(autoincrement())
+  name  String
+  Event Event[]
+
+  @@map("trainer")
 }
