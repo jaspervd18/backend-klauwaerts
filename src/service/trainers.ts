@@ -8,6 +8,21 @@ const getAll = async (limit: number, offset: number) => {
   return data;
 };
 
+const getById = async (id: number) => {
+  const data = await prisma.trainer.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      name: true,
+    },
+  });
+  if (data === null) return null;
+  return {
+    ...data,
+  };
+};
+
 export default {
   getAll,
+  getById,
 };
