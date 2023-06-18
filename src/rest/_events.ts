@@ -10,14 +10,9 @@ import {
 } from "../utils/validator";
 
 const getAllEvents = async (req: Request, res: Response) => {
-  res
-    .status(200)
-    .json(
-      await eventService.getAll(
-        Number(req.query.limit),
-        Number(req.query.offset)
-      )
-    );
+  const month = Number(req.query.month) || new Date().getMonth() + 1;
+  const year = Number(req.query.year) || new Date().getFullYear();
+  res.status(200).json(await eventService.getAll(month, year));
 };
 
 const getEventById = async (req: Request, res: Response) => {

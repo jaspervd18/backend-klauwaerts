@@ -17,7 +17,7 @@ const getAllTrainers = async (req: Request, res: Response) => {
 
 const getTrainerById = async (req: Request, res: Response) => {
   const event = await trainerService.getById(Number(req.params.id));
-  if (!event) throw new AppError(404, `Event ${req.params.id} not found!`);
+  if (!event) throw new AppError(404, `Trainer ${req.params.id} not found!`);
   res.status(200).json(event);
 };
 

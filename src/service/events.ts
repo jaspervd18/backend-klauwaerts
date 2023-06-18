@@ -1,11 +1,20 @@
 import { prisma } from "../repository/db";
 
-const getAll = async (limit: number, offset: number) => {
-  const data = await prisma.event.findMany({
-    take: limit,
-    skip: offset,
+const getAll = async (month: number, year: number) => {
+  const count = await prisma.event.count();
+  const startDate = new Date(year, month - 1, 1);
+  const endDate = new Date(year, month, 0);
+
+  const events = await prisma.event.findMany({
+    where: {
+      start: {
+        gte: startDate,
+        lt: endDate,
+      },
+    },
   });
-  return data;
+
+  return { count, events };
 };
 
 const getById = async (id: number) => {
