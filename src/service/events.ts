@@ -12,6 +12,18 @@ const getAll = async (month: number, year: number) => {
         lt: endDate,
       },
     },
+    select: {
+      id: true,
+      title: true,
+      start: true,
+      end: true,
+      trainer: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
   });
 
   return { count, events };
