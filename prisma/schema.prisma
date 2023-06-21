@@ -8,12 +8,13 @@ datasource db {
 }
 
 model Event {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   title     String
-  start     DateTime @default(now())
-  end       DateTime @default(now())
-  trainer   Trainer? @relation(fields: [trainerId], references: [id], onDelete: SetNull)
+  start     DateTime  @default(now())
+  end       DateTime  @default(now())
+  trainer   Trainer?  @relation(fields: [trainerId], references: [id], onDelete: SetNull)
   trainerId Int?
+  afwezigen Student[]
 
   @@map("event")
 }
@@ -36,3 +37,21 @@ model Degree {
 
   @@map("degree")
 }
+
+model Student {
+  id           Int     @id @default(autoincrement())
+  name         String
+  afwezigheden Event[]
+
+  @@map("student")
+}
+
+// model Afwezigheden {
+//   event      Event    @relation(fields: [eventId], references: [id])
+//   eventId    Int
+//   student    Student  @relation(fields: [studentId], references: [id])
+//   studentId  Int
+//   assignedAt DateTime @default(now())
+
+//   @@id([eventId, studentId])
+// }

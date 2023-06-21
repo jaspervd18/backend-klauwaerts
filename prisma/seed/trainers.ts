@@ -19,12 +19,12 @@ const TRAINERS = [
   {
     id: 1,
     name: "Jasper Van Dyck",
-    degreeId: 2,
+    degreeId: 3,
   },
   {
     id: 2,
     name: "Saartje Corteyn",
-    degreeId: 2,
+    degreeId: 3,
   },
   {
     id: 3,

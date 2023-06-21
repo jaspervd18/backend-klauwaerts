@@ -18,22 +18,32 @@ export default async function seedDegrees() {
 const DEGREES = [
   {
     id: 1,
-    name: "Initiator",
-    payment: 11.0,
+    name: "Geen diploma",
+    payment: 10.0,
   },
   {
     id: 2,
-    name: "Trainer C",
-    payment: 13.0,
+    name: "Aspirant + hoofdpiratenjuf",
+    payment: 11.0,
   },
   {
     id: 3,
-    name: "Trainer B",
-    payment: 14.5,
+    name: "Initiator",
+    payment: 13.0,
   },
   {
     id: 4,
+    name: "Trainer C",
+    payment: 15.0,
+  },
+  {
+    id: 5,
+    name: "Trainer B",
+    payment: 20.0,
+  },
+  {
+    id: 6,
     name: "Trainer A",
-    payment: 17.0,
+    payment: 30.0,
   },
 ];
