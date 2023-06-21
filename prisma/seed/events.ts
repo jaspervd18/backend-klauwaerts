@@ -21,15 +21,15 @@ const EVENTS = [
   {
     id: 1,
     title: "Schermschool",
-    start: new Date("2023-06-16T18:00:00.000Z"),
-    end: new Date("2023-06-16T19:30:00.000Z"),
+    start: new Date("2023-06-16T16:00:00.000Z"),
+    end: new Date("2023-06-16T17:30:00.000Z"),
     trainerId: 1,
   },
   {
     id: 2,
     title: "Beloften & Volwassenen",
-    start: new Date("2023-06-16T19:30:00.000Z"),
-    end: new Date("2023-06-16T21:30:00.000Z"),
+    start: new Date("2023-06-16T17:30:00.000Z"),
+    end: new Date("2023-06-16T19:30:00.000Z"),
     trainerId: 2,
   },
 ];

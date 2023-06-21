@@ -1,9 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import seedEvents from "./seed/events";
 import seedTrainers from "./seed/trainers";
+import seedDegrees from "./seed/degrees";
 const prisma = new PrismaClient();
 
 async function main() {
+  await seedDegrees();
   await seedTrainers();
   await seedEvents();
 }

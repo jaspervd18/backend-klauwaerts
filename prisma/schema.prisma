@@ -19,9 +19,20 @@ model Event {
 }
 
 model Trainer {
-  id    Int     @id @default(autoincrement())
-  name  String
-  Event Event[]
+  id       Int     @id @default(autoincrement())
+  name     String
+  Event    Event[]
+  degree   Degree? @relation(fields: [degreeId], references: [id], onDelete: SetNull)
+  degreeId Int?
 
   @@map("trainer")
+}
+
+model Degree {
+  id      Int       @id @default(autoincrement())
+  name    String
+  payment Decimal   @default(0) @db.Decimal(10, 2)
+  Trainer Trainer[]
+
+  @@map("degree")
 }

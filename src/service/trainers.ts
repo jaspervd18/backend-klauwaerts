@@ -14,6 +14,13 @@ const getById = async (id: number) => {
     select: {
       id: true,
       name: true,
+      degree: {
+        select: {
+          id: true,
+          name: true,
+          payment: true,
+        },
+      },
     },
   });
   if (data === null) return null;
