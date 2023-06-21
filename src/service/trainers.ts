@@ -4,6 +4,17 @@ const getAll = async (limit: number, offset: number) => {
   const data = await prisma.trainer.findMany({
     take: limit,
     skip: offset,
+    select: {
+      id: true,
+      name: true,
+      degree: {
+        select: {
+          id: true,
+          name: true,
+          payment: true,
+        },
+      },
+    },
   });
   return data;
 };
