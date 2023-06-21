@@ -64,13 +64,15 @@ const create = async (body: any) => {
 
 const updateById = async (id: number, body: any) => {
   if ((await getById(id)) === null) return null;
-  const { title, start, end } = body;
+  const { title, start, end, trainerId } = body;
+  const hasTrainer = trainerId > 0;
   return prisma.event.update({
     where: { id },
     data: {
       title: title,
       start: start,
       end: end,
+      trainer: hasTrainer ? { connect: { id: trainerId } } : undefined,
     },
   });
 };

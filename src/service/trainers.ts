@@ -1,7 +1,7 @@
 import { prisma } from "../repository/db";
 
 const getAll = async (limit: number, offset: number) => {
-  const data = await prisma.event.findMany({
+  const data = await prisma.trainer.findMany({
     take: limit,
     skip: offset,
   });
