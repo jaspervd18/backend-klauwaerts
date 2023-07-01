@@ -32,4 +32,23 @@ const EVENTS = [
     end: new Date("2023-06-16T19:30:00.000Z"),
     trainerId: 2,
   },
+  {
+    id: 3,
+    title: "Schermschool",
+    start: new Date("2023-06-21T16:00:00.000Z"),
+    end: new Date("2023-06-21T17:30:00.000Z"),
+  },
+  {
+    id: 4,
+    title: "Beloften & Volwassenen",
+    start: new Date("2023-06-21T17:30:00.000Z"),
+    end: new Date("2023-06-21T19:30:00.000Z"),
+  },
+  {
+    id: 5,
+    title: "Clubbeker",
+    start: new Date("2023-06-23T16:00:00.000Z"),
+    end: new Date("2023-06-23T19:30:00.000Z"),
+    trainerId: 1,
+  },
 ];

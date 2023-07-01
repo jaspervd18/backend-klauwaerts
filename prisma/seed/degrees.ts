@@ -18,7 +18,7 @@ export default async function seedDegrees() {
 const DEGREES = [
   {
     id: 1,
-    name: "Geen diploma",
+    name: "Geen",
     payment: 10.0,
   },
   {

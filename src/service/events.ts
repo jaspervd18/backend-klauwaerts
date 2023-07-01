@@ -23,6 +23,12 @@ const getAll = async (month: number, year: number) => {
           name: true,
         },
       },
+      afwezigen: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
     },
   });
 
@@ -38,6 +44,12 @@ const getById = async (id: number) => {
       start: true,
       end: true,
       trainer: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      afwezigen: {
         select: {
           id: true,
           name: true,
@@ -64,7 +76,7 @@ const create = async (body: any) => {
 
 const updateById = async (id: number, body: any) => {
   if ((await getById(id)) === null) return null;
-  const { title, start, end, trainerId } = body;
+  const { title, start, end, trainerId, afwezigen } = body;
   const hasTrainer = trainerId > 0;
   return prisma.event.update({
     where: { id },
@@ -73,6 +85,7 @@ const updateById = async (id: number, body: any) => {
       start: start,
       end: end,
       trainer: hasTrainer ? { connect: { id: trainerId } } : undefined,
+      afwezigen: afwezigen?.length > 0 ? { connect: afwezigen } : undefined,
     },
   });
 };
