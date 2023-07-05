@@ -20,9 +20,19 @@ const updateEventValidator = [
 
 const newEventValidator = [...updateEventValidator];
 
+const updateCompetitionValidator = [
+  body("type", "Type is required").isString(),
+  body("title", "Title is required").isString(),
+  body("day", "Day of event is required").isString(),
+];
+
+const newCompetitionValidator = [...updateCompetitionValidator];
+
 export {
   idValidator,
   limitOffsetValidator,
   updateEventValidator,
   newEventValidator,
+  updateCompetitionValidator,
+  newCompetitionValidator,
 };
