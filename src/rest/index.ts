@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { getLogger } from "../utils/logging";
 import eventsRouter from "./_events";
 import trainersRouter from "./_trainers";
+import competitionsRouter from "./_competitions";
 
 export function installRestRouter(app: Express) {
   /**
@@ -18,5 +19,6 @@ export function installRestRouter(app: Express) {
   });
   app.use("/api/events", eventsRouter);
   app.use("/api/trainers", trainersRouter);
+  app.use("/api/competitions", competitionsRouter);
   getLogger().debug("API endpoints setup");
 }
