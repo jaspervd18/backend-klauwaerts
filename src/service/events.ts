@@ -90,10 +90,11 @@ const getById = async (id: number) => {
 };
 
 const create = async (body: any) => {
-  const { title, start, end } = body;
+  const { title, start, end, type } = body;
   return prisma.event.create({
     data: {
       title: title,
+      type: type || null,
       start: start,
       end: end,
     },
