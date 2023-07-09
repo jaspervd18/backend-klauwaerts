@@ -15,9 +15,22 @@ const getAll = async (month: number, year: number) => {
     select: {
       id: true,
       title: true,
+      type: true,
       start: true,
       end: true,
       trainer: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      referee: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      coach: {
         select: {
           id: true,
           name: true,
@@ -41,9 +54,22 @@ const getById = async (id: number) => {
     select: {
       id: true,
       title: true,
+      type: true,
       start: true,
       end: true,
       trainer: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      referee: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      coach: {
         select: {
           id: true,
           name: true,
@@ -76,8 +102,10 @@ const create = async (body: any) => {
 
 const updateById = async (id: number, body: any) => {
   if ((await getById(id)) === null) return null;
-  const { title, start, end, trainerId, afwezigen } = body;
+  const { title, start, end, trainerId, coachId, refereeId, afwezigen } = body;
   const hasTrainer = trainerId > 0;
+  const hasCoach = coachId > 0;
+  const hasReferee = refereeId > 0;
   return prisma.event.update({
     where: { id },
     data: {
@@ -85,6 +113,8 @@ const updateById = async (id: number, body: any) => {
       start: start,
       end: end,
       trainer: hasTrainer ? { connect: { id: trainerId } } : undefined,
+      coach: hasCoach ? { connect: { id: coachId } } : undefined,
+      referee: hasReferee ? { connect: { id: refereeId } } : undefined,
       afwezigen: afwezigen?.length > 0 ? { connect: afwezigen } : undefined,
     },
   });
