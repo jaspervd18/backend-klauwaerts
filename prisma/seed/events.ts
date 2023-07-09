@@ -61,5 +61,15 @@ const EVENTS = [
     start: new Date("2023-07-29"),
     end: new Date("2023-07-29"),
     coachId: 3,
+    refereeId: 4,
+  },
+  {
+    id: 7,
+    title: "Gulden Klauw",
+    type: "Nationaal",
+    start: new Date("2023-07-22"),
+    end: new Date("2023-07-22"),
+    coachId: 1,
+    refereeId: 2,
   },
 ];
