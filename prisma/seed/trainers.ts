@@ -31,4 +31,14 @@ const TRAINERS = [
     name: "Ynte Audenaert",
     degreeId: 1,
   },
+  {
+    id: 4,
+    name: "Runa Van Leugenhaege",
+    degreeId: 1,
+  },
+  {
+    id: 5,
+    name: "Janne Beda",
+    degreeId: 1,
+  },
 ];

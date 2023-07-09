@@ -10,28 +10,19 @@ datasource db {
 model Event {
   id    Int      @id @default(autoincrement())
   title String
+  type  String?
   start DateTime @default(now())
   end   DateTime @default(now())
 
   trainer   Trainer?  @relation(fields: [trainerId], references: [id], onDelete: SetNull)
   trainerId Int?
+  referee   Trainer?  @relation(fields: [refereeId], references: [id], onDelete: SetNull, name: "referee")
+  refereeId Int?
+  coach     Trainer?  @relation(fields: [coachId], references: [id], onDelete: SetNull, name: "coach")
+  coachId   Int?
   afwezigen Student[]
 
   @@map("event")
-}
-
-model Competition {
-  id    Int      @id @default(autoincrement())
-  type  String
-  title String
-  date  DateTime @default(now())
-
-  referee   Trainer? @relation(fields: [refereeId], references: [id], onDelete: SetNull, name: "referee")
-  refereeId Int?
-  coach     Trainer? @relation(fields: [coachId], references: [id], onDelete: SetNull, name: "coach")
-  coachId   Int?
-
-  @@map("competition")
 }
 
 model Trainer {
@@ -41,8 +32,8 @@ model Trainer {
   degreeId Int?
 
   events     Event[]
-  refereeing Competition[] @relation("referee")
-  coaching   Competition[] @relation("coach")
+  refereeing Event[] @relation("referee")
+  coaching   Event[] @relation("coach")
 
   @@map("trainer")
 }
